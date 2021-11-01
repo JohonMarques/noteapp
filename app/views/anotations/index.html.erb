@@ -1,38 +1,54 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <h4 class="mt-4 display-4">Anotações</h4>
-  </div>
-  <% if @anotations.present? %>
-    <div class="row justify-content-center">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Titulo</th>
-            <th scope="col">Anotação</th>
-            <th scope="col">Data/Hora</th>
-            <th scope="col">Prioridade</th>
-            <th scope="col" colspan="2">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @anotations.each do |anotation| %>
-            <tr>
-              <td><%= anotation.title %></td>
-              <td><%= anotation.note %></td>
-              <td><%= anotation.date.strftime('%d/%m/%Y %H:%M') %></td>
-              <td><%= anotation.priority %></td>
-              <td><%= link_to 'Editar', edit_anotation_path(anotation.id) %></td>
-              <td><%= link_to 'Excluir', anotation_path(anotation.id), method: :delete, data: { confirm: 'Tem certeza que quer excluir?' } %></td>              
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <p class="navbar-text float-right">
+    <% if user_signed_in? %>
+        Logado como: <strong><%= current_user.email %></strong>.
+        <%= link_to 'Editar perfil', edit_user_registration_path, :class => 'navbar-link' %> |
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+    <% else %>
+        <%= link_to "Registrar-se", new_user_registration_path, :class => 'navbar-link'  %> |
+        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+    <% end %>
+    <div class="row justify-content-center mb-3">
+        <h4 class="mt-4 display-4">Anotações</h4>
     </div>
-    <%= link_to 'Nova Anotação', new_anotation_path, class: "btn btn-primary" %>
-  <% else %>
-    <div class="p-3 mb-2 bg-light text-dark">
-      <span class="text-info font-weight-bold">Bem Vindo! </span>
-      Voce ainda nao tem nenhuma anotação clique <%= link_to 'aqui', new_anotation_path %> para criar sua primeira anotação.
-    </div>
-  <% end %>
+    <%= search_form_for @q, class:'row g-3' do |f| %>
+        <div class="col-auto d-flex">
+            <%= f.label :title_cont, 'Título' %>
+            <%= f.search_field :title_cont, class: 'form-control' %>
+            <%= f.submit 'Buscar', class: 'btn btn-outline-primary' %>
+        </div>
+    <% end %>
+    <% if @anotations.present? %>
+        <div class="row justify-content-center mt-3">
+            <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Anotação</th>
+                    <th scope="col">Data/Hora</th>
+                    <th scope="col">Prioridade</th>
+                    <th scope="col" colspan="2">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @anotations.each do |anotation| %>
+                <tr>
+                    <td><%= anotation.title %></td>
+                    <td><%= anotation.note %></td>
+                    <td><%= anotation.date.strftime('%d/%m/%Y %H:%M') %></td>
+                    <td><%= anotation.priority %></td>
+                    <td><%= link_to 'Editar', edit_anotation_path(anotation.id) %></td>
+                    <td><%= link_to 'Excluir', anotation_path(anotation.id), method: :delete, data: { confirm: 'Tem certeza que quer excluir?' } %></td>              
+                </tr>
+                <% end %>
+            </tbody>
+            </table>
+        </div>
+        <%= link_to 'Nova Anotação', new_anotation_path, class: "btn btn-primary" %>
+    <% else %>
+        <div class="p-3 mb-2 bg-light text-dark">
+        <span class="text-info font-weight-bold">Bem Vindo! </span>
+        Voce ainda nao tem nenhuma anotação clique <%= link_to 'aqui', new_anotation_path %> para criar sua primeira anotação.
+        </div>
+    <% end %>
 </div>
