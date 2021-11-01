@@ -25,7 +25,8 @@
       </div>
 
       <div class="form-group">
-        <%= form.submit class: 'form-control btn-primary' %>
+        <%= form.submit 'Salvar Anotação', class: 'form-control btn-success mb-1' %>
+        <%= link_to 'Cancelar', root_path, class: "btn btn-danger" %>
       </div>
     <% end %>
   </div>
