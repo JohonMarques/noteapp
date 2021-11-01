@@ -1,0 +1,14 @@
+
+development:
+  adapter: postgresql
+  database: noteapp_development
+  username: #seu usuario do banco
+  password: #sua senha do banco
+  host: localhost
+
+#comentado por que esse app nao vai para produção
+
+# production:
+#   database: noteapp_production
+#   username: noteapp
+#   password: <%= ENV['NOTEAPP_DATABASE_PASSWORD'] %>
