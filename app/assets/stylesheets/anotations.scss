@@ -10,6 +10,15 @@ select#anotation_priority{
     width: 10rem;
 }
 
-#q_title_cont{
+#q_title_or_note_cont{
     margin: 0 .8rem;
+}
+.prioridade-alta{
+    background: #f52732;
+}
+.prioridade-media{
+    background: #d2f525;
+}
+.prioridade-baixa{
+    background: #03f838;
 }

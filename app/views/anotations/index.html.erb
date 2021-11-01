@@ -13,8 +13,7 @@
     </div>
     <%= search_form_for @q, class:'row g-3' do |f| %>
         <div class="col-auto d-flex">
-            <%= f.label :title_cont, 'Título' %>
-            <%= f.search_field :title_cont, class: 'form-control' %>
+            <%= f.search_field :title_or_note_cont, class: 'form-control', placeholder: 'Digite sua busca' %>
             <%= f.submit 'Buscar', class: 'btn btn-outline-primary' %>
         </div>
     <% end %>
@@ -33,10 +32,10 @@
             <tbody>
                 <% @anotations.each do |anotation| %>
                 <tr>
-                    <td><%= anotation.title %></td>
-                    <td><%= anotation.note %></td>
-                    <td><%= anotation.date.strftime('%d/%m/%Y %H:%M') %></td>
-                    <td><%= anotation.priority %></td>
+                    <td class= "prioridade-<%= anotation.priority.downcase %>"><%= anotation.title %></td>
+                    <td class= "prioridade-<%= anotation.priority.downcase %>"><%= anotation.note %></td>
+                    <td class= "prioridade-<%= anotation.priority.downcase %>"><%= anotation.date.strftime('%d/%m/%Y %H:%M') %></td>
+                    <td class= "prioridade-<%= anotation.priority.downcase %>"><%= anotation.priority %></td>
                     <td><%= link_to 'Editar', edit_anotation_path(anotation.id) %></td>
                     <td><%= link_to 'Excluir', anotation_path(anotation.id), method: :delete, data: { confirm: 'Tem certeza que quer excluir?' } %></td>              
                 </tr>
