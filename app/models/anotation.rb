@@ -1,0 +1,2 @@
+class Anotation < ApplicationRecord
+end
