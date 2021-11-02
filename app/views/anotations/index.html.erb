@@ -32,9 +32,9 @@
             <tbody>
                 <% @anotations.each do |anotation| %>
                 <tr>
-                    <td class= "prioridade-<%= anotation.priority.downcase %>"><%= anotation.title %></td>
-                    <td class= "prioridade-<%= anotation.priority.downcase %>"><%= anotation.note %></td>
-                    <td class= "prioridade-<%= anotation.priority.downcase %>"><%= anotation.date.strftime('%d/%m/%Y %H:%M') %></td>
+                    <td><%= anotation.title %></td>
+                    <td><%= raw anotation.note %></td>
+                    <td><%= anotation.date.strftime('%d/%m/%Y %H:%M') %></td>
                     <td class= "prioridade-<%= anotation.priority.downcase %>"><%= anotation.priority %></td>
                     <td><%= link_to 'Editar', edit_anotation_path(anotation.id) %></td>
                     <td><%= link_to 'Excluir', anotation_path(anotation.id), method: :delete, data: { confirm: 'Tem certeza que quer excluir?' } %></td>              
