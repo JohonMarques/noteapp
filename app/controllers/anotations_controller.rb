@@ -1,13 +1,14 @@
 class AnotationsController < ApplicationController
   def index
-    @anotations = Anotation.all
+    @anotations = Anotation.where(user_id: current_user.id)
 
-    @q = Anotation.ransack(params[:q])
+    @q = Anotation.where(user_id: current_user.id).ransack(params[:q])
     @anotations = @q.result(distinct: true)
   end
   
   def create
     anotation = Anotation.new(anotation_params)
+    anotation.user_id = current_user.id
     anotation.save
     
     redirect_to root_path
@@ -33,6 +34,6 @@ class AnotationsController < ApplicationController
   private
 
   def anotation_params
-    params.require(:anotation).permit(:title, :note, :date, :priority)
+    params.require(:anotation).permit(:title, :note, :date, :priority, :user_id)
   end
 end
